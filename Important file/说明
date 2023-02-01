@@ -1,0 +1,157 @@
+在MallConsumerApplication中如果AOP不好使 需要在类上加如下代码
+
+//@EnableAspectJAutoProxy//Aop不好使的时候 必须加上 否则AOP不好使 调了50分钟
+
+同时 在Consumer的POM上加入如下代码
+<dependency>
+  <groupId>org.aspectj</groupId>
+     <artifactId>aspectjweaver</artifactId>
+     <version>1.9.6</version>
+</dependency>
+
+UMSLog的字段顺序必须是如下 否则flink数据转换错误
+
+ private Long id;
+    private String createTime;
+    private String updateTime;
+    private Integer costTime;
+    private String ip;
+    private String name;
+    private String requestParam;//顺序千万不能错误 否则flink不好使
+    private String requestType;
+    private String requestUrl;
+    private Integer userid;
+    private Integer logType;
+
+
+
+
+启动前端：打开前端工程，在命令行中输入：npm run dev
+
+
+第一次演示 flume+kafka+mysql的时候
+要把你要使用的数据库的权限放开 在Heidi中执行
+
+GRANT ALL PRIVILEGES ON *.* TO root@"%" IDENTIFIED BY "root";
+flush privileges;
+
+
+由于使用了nginx服务器，因此我们需要启动nginx服务器，
+
+因为在mall_admin_web端 的所有异步访问都访问的是localhost，例如 prod.env.js文件下，总的异步API路径是
+'use strict'
+module.exports = {
+  NODE_ENV: '"production"',
+  BASE_API: '"http://localhost"'
+}
+
+并且在E:\DOC\java\Nginx-ex\nginx-1.16.1\nginx-1.16.1\conf\nginx.conf的内容和你后端启动两台tomcat服务器的端口一致
+
+upstream tomcat {
+        server 127.0.0.1:8080 weight=10;
+        server 127.0.0.1:8081 weight=10;#可以在这里加权重
+}
+location / {
+        #root   html;
+        #index  index.html index.htm;
+        proxy_pass http://tomcat;
+        proxy_redirect default;
+}
+
+windows端启动nginx
+在Nginx安装的目录下
+
+启动Nginx：
+
+start nginx  或双击nginx.exe
+
+其他命令
+
+停止Nginx：
+
+nginx -s stop（直接停止） 或者 nginx -s quit（有序停止）
+
+重新载入Nginx：
+
+配置修改后，需要重新载入，nginx  -s reload
+
+
+
+
+centos 后端启动命令，并把启动日志输出到 nohup.out 内。
+nohup+命令+&
+
+双击启动Nginx：
+
+
+1.启动前端 需要先安装 node.exe
+npm run dev
+
+2.以后台方式 启动redis-server /usr/redis/redis-5.0.5
+src/redis-server redis.conf --daemonize yes
+
+3.启动redis-cli
+src/redis-cli --raw
+
+4.第一次，更改config下的文件为zoo.cfg /usr/flink/zookeeper-3.4.13
+启动zoo
+bin/zkServer.sh start
+
+5 后台centos启动rabbitmq ,任何目录下 /usr/flink/rabbitmq_server-3.7.8
+rabbitmq-server -detached
+或登录：http://master:15672 可以看rabbitmq web
+关闭服务：
+rabbitmqctl stop
+
+
+
+【6.或 后台windows启动rabbitmq
+rabbitmq-server.bat -detached
+登录：http://localhost:15672 可以看rabbitmq web】
+
+/*以下用不上该功能 暂时不用启动服务器*/
+
+7.后台启动kafka,首先进入到kafka所在目录 usr/flink/kafka,
+nohup bin/kafka-server-start.sh config/server.properties &
+必须回车
+
+8.第一次需要创建topic
+bin/kafka-topics.sh --create --topic malluv --zookeeper master:2181 --partitions 5 --replication-factor 1
+
+9.查看kafka服务器的所有topic
+  bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+
+
+
+11.拷贝Jar包进入 /usr/flink/apache-flume-1.8.0-bin/lib目录。包括
+本项目的jar目录下的文件。
+
+12.第一次，需要修改conf下的flume-conf-template.properties文件为  malluv.conf，并且添加其内容，
+文件内容见本项目。
+
+13.第一次，需要删除flume 的temp目录下的类似sqlSourceXXX文件，
+启动flume，其中a1是malluv.conf文件定义的agent ，
+# 192.168.1.206：mysql服务器IP一致
+a1.sources.src-1.hibernate.connection.url = jdbc:mysql://192.168.1.206/mymall
+
+这里的连接mysql的IP是192.168.1.206,你得mysql服务器ip必须和他一样，
+否则无法监听
+
+# malluv：和你创建的kafka主题topic 一样
+a1.sinks.k1.topic = malluv
+
+# 192.168.177.200：kafka服务器IP一致
+a1.sinks.k1.brokerList = 192.168.177.200:9092
+
+启动flume
+./bin/flume-ng agent -n a1 -c conf -f conf/malluv.conf -Dflume.root.logger=INFO,console
+
+
+
+10.也可以查看kafka服务器的数据
+  bin/kafka-console-consumer.sh --bootstrap-server master:9092 --topic malluv --from-beginning|more
+
+
+
+看开发文档工具：http://localhost:8080/swagger-ui.html

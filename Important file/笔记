@@ -1,0 +1,41 @@
+启动Linux下的中间件
+Redis:
+Src/redis-server  redis.conf  --daemonize yes
+src/redis-cli --raw
+
+Zookeeper:
+bin/zkServer.sh start
+
+
+Rabbitmq:
+后台启动
+rabbitmq-server -detached
+rabbitmqctl start
+rabbitmqctl stop
+rabbitmqctl status 查看状态
+rabbitmqctl list_users 列出角色
+
+
+
+
+Kafka:
+
+
+
+启动前端:
+打开前端工程，在命令行中输入：npm run dev
+
+
+
+
+
+人脸识别：
+登录百度AI
+注册一个组：将mymall信息写到common中进行注册，然后再controller层使用login用户组。
+
+
+
+AOP技术：面向切面
+例如：前置增加，后置增强等。。。。
+这里要在执行核心方法之前，将当前用户的行为写入到mysql中的ums_log中用户今后的大数据计算和统计。由此使用AOP进行实现
+
