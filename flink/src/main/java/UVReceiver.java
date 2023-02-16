@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author js
- * @date 2022/1/7 18:05
+ * @date 2023/1/7 18:05
  */
 public class UVReceiver {
     public static void main(String[] args) throws Exception {
