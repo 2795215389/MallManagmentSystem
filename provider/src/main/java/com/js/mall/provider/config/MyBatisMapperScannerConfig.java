@@ -35,8 +35,6 @@ import org.springframework.context.annotation.Configuration;
  * 如果你不使用通用Mapper，可以改为org.mybatis.spring.mapper.MapperScannerConfigurer
  * 之后，就能用上我们自己生成的mapper了
  *
-
-  * @since 2016-11-3 21:42
  */
 @Configuration
 //TODO 注意，由于MapperScannerConfigurer执行的比较早，所以必须有下面的注解

@@ -17,7 +17,7 @@ public class AIBaiduFaceBean {
 
 	@Data
 	public static class Result{
-		private String face_token;
+		private String face_token;//这张人脸的唯一标识
 		private List<HashMap<String,Object>> user_list;
 
 	}

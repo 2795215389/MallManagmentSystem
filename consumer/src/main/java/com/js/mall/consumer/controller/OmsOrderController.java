@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @author js
- * @date 2022/12/5 18:12
- */
+
 @RestController
 @Api(tags = "OmsOrderController",description = "订单管理")
 @RequestMapping("/order")

@@ -73,8 +73,9 @@ public class SystemLogAspect implements HandlerInterceptor {//拦截器
     private IUserService userService;
 
     @Pointcut("@annotation(com.js.api.annotation.SystemLog)")//切面只对该注解生效
+    // 等效 @Pointcut("execution(* com.js.mall.consumer.controller.*.*(..))")
     public void controllerAspect(){
-        System.out.println("");
+        System.out.println("这是一个切点！！！");
     }
 
 
@@ -95,8 +96,6 @@ public class SystemLogAspect implements HandlerInterceptor {//拦截器
 //        String targetName=joinPoint.getTarget().getClass().getName();
 //        //获取方法名
 //        String methodName=joinPoint.getSignature().getName();
-
-
 //        //获取相关参数
 //        Object[] arguments=joinPoint.getArgs();
 //        //生成类对象

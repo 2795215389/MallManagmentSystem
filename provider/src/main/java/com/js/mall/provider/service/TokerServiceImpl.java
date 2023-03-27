@@ -17,6 +17,8 @@ import java.util.Date;
 public class TokerServiceImpl implements ITokenService {
 
     private static final long EXPIRE_TIME=5*600*1000;//50分钟
+
+
     @Override
     public String getToken(String userId, String password) {//生成token码
         String token="";
@@ -25,7 +27,8 @@ public class TokerServiceImpl implements ITokenService {
             Date date=new Date(System.currentTimeMillis()+EXPIRE_TIME);
 
             //作为Token区分码,设置过期时间,加密
-            token=JWT.create().withAudience(userId).withExpiresAt(date).sign(Algorithm.HMAC256(password));
+            token=JWT.create().withAudience(userId).
+                    withExpiresAt(date).sign(Algorithm.HMAC256(password));
 
 
         }catch(Exception e){
@@ -36,6 +39,7 @@ public class TokerServiceImpl implements ITokenService {
         return token;
     }
 
+    //通过token码得出uid
     @Override
     public String getUserId(String token) {
         try{
@@ -56,7 +60,6 @@ public class TokerServiceImpl implements ITokenService {
         try{
             JWTVerifier jwtVerifier=JWT.require(Algorithm.HMAC256(password)).build();
             jwtVerifier.verify(token);
-
         }catch(Exception e){
             throw new RuntimeException("token无效，请重新登录");
         }

@@ -41,12 +41,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/**
- * MyBatis基础配置
- *
 
-  * @since 2016-11-3 21:42
- */
 @Configuration
 @EnableTransactionManagement
 @EnableAspectJAutoProxy

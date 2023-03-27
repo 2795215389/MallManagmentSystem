@@ -14,10 +14,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
-/**
- * @author js
- * @date 2022/12/2 18:52
- */
+
 @Service(
         version="1.0.0",
         interfaceName = "com.js.api.service.IPmsBrandService",

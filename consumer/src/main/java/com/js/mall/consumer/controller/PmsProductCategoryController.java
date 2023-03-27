@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * @author js
- * @date 2022/12/2 19:41
- */
+
 @RestController
 @Api(tags = "PmsProductCategoryController",description = "商品分类管理")
 @RequestMapping("/productCategory")

@@ -15,10 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * @author js
- * @date 2022/12/2 18:51
- */
+
 @RestController
 @Api(tags = "PmsBrandController",description = "品牌管理")
 @RequestMapping("/brand")

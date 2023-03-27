@@ -13,10 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
-/**
- * @author js
- * @date 2022/12/2 19:47
- */
+
 @Service(
         version="1.0.0",
         interfaceName = "com.js.api.service.IPmsProductCategoryService",

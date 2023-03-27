@@ -21,11 +21,7 @@ import java.lang.reflect.Method;
 import java.time.Duration;
 
 
-/**
- * 创建人：Jason
- * 创建时间：2020/1/8
- * 描述你的类：
- */
+
 @Configuration
 public class RedisCacheConfig {
     //Redis缓存Key生成器 就是让key形成唯一值，方便调用 默认是simpleKeyGenerator生成器

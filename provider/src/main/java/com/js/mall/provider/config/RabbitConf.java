@@ -5,12 +5,7 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * 创建人：Jason
- * 创建时间：2020/1/4
- * 描述你的类：
-。
- */
+
 @Configuration
 public class RabbitConf {
     /**
@@ -42,7 +37,6 @@ public class RabbitConf {
     public Queue orderQueue() {
         return new Queue(QueueEnum.QUEUE_ORDER_CANCEL.getName());
     }
-
     /**
      * 订单延迟队列（死信队列）
      */
