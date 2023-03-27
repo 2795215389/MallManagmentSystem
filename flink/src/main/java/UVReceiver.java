@@ -78,8 +78,6 @@ public class UVReceiver {
                  }
 
                  */
-
-                //将数据转为JSON格式——字段名：值，写为对象
                 for(int i=0;i<list.size();i++){
                     sb.append(fs[i].getName()+":"+list.get(i)+",");
                 }
@@ -92,8 +90,7 @@ public class UVReceiver {
                 e.printStackTrace();
             }
             return u;
-        }).keyBy("updateTime","logType")//按照“日期”和“操作类型”进行关键字统计
-                //只留下需要的2个字段
+        }).keyBy("updateTime","logType")//按照日期和页面进行keyBy
         .map(new RichMapFunction<UmsLog, Tuple2<String,Long>>() {
             //存储当前key对应的userId集合
             private MapState<String,Boolean> userIdState;
@@ -121,9 +118,9 @@ public class UVReceiver {
                 if(uvState.value()==null){
                     uvState.update(0L);
                 }
-                //先判断是否使用不同用户访问该页面（进行该日志类型的操作） 如果是 则UV+1
+                //先判断是否使用不同用户访问该页面 如果是 则UV+1
                 if(!userIdState.contains(umsLog.getUserid().toString())){
-                    userIdState.put(umsLog.getUserid().toString(),null);
+                    userIdState.put(umsLog.getUserid().toString(),null);//今天没有访问该页面
                     uvState.update(uvState.value()+1);
                 }
                 //生成Redis key，格式为 日期_logType
